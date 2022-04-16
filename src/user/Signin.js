@@ -114,7 +114,7 @@ const Signin = () => {
   return (
     <Base
       title="Sign in page"
-      description="Here Sign up"
+      description="Here Sign in"
       className="text-white mt-5"
     >
       <Geaustaccount />

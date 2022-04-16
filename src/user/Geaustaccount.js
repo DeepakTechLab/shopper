@@ -27,7 +27,7 @@ const Geaustaccount = () => {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="staticBackdropLabel">
-                Some account
+                Log in this admin account
               </h5>
               <button
                 type="button"
@@ -44,13 +44,10 @@ const Geaustaccount = () => {
             <div className="modal-footer">
               <button
                 type="button"
-                className="btn btn-secondary"
+                className="btn btn-secondary rounded"
                 data-bs-dismiss="modal"
               >
                 Close
-              </button>
-              <button type="button" className="btn btn-primary">
-                Understood
               </button>
             </div>
           </div>
