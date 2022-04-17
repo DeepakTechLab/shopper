@@ -5,13 +5,17 @@ import Card from "./Card";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const getAllProducts = () => {
+    setLoading(true);
     getallproducts().then((data) => {
       if (data.error) {
         window.alert("Something worng");
+        setLoading(false);
       } else {
         setProducts(data);
+        setLoading(false);
       }
     });
   };
@@ -21,15 +25,27 @@ const Home = () => {
 
   return (
     <Base title="Fly Buy , shopping" className="text-white mt-4">
-      <div className="row row-cols-auto">
-        {products.map((product, index) => {
-          return (
-            <div className="col c-cart p-2 m-1 text-dark" key={index}>
-              <Card product={product} />
-            </div>
-          );
-        })}
-      </div>
+      {loading ? (
+        <div className="container text-center mt-5">
+          <div
+            className="spinner-border"
+            style={{ width: "5rem", height: "5rem" }}
+            role="status"
+          >
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      ) : (
+        <div className="row row-cols-auto">
+          {products.map((product, index) => {
+            return (
+              <div className="col c-cart p-2 m-1 text-dark" key={index}>
+                <Card product={product} />
+              </div>
+            );
+          })}
+        </div>
+      )}
     </Base>
   );
 };
