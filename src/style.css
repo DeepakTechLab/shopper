@@ -1,3 +1,36 @@
+/* CSS Variables for Theme */
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-card: #ffffff;
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --border-color: #dee2e6;
+  --admin-area-bg: #e9ecef;
+  --admin-parent-1-bg: #d3d3d3;
+  --admin-parent-2-bg: #c8c8c8;
+  --manage-category-parent-bg: #b0b0b0;
+  --manage-category-child-bg: #e0e0e0;
+  --navbar-bg: #f8f9fa;
+  --navbar-text: #212529;
+}
+
+body[data-theme="dark"] {
+  --bg-primary: #000000;
+  --bg-secondary: #1a1a1a;
+  --bg-card: #2a2a2a;
+  --text-primary: #ffffff;
+  --text-secondary: #b0b0b0;
+  --border-color: #404040;
+  --admin-area-bg: #222831;
+  --admin-parent-1-bg: #082032;
+  --admin-parent-2-bg: #1A1A40;
+  --manage-category-parent-bg: #525E75;
+  --manage-category-child-bg: #00092C;
+  --navbar-bg: #212529;
+  --navbar-text: #ffffff;
+}
+
 .btn,
 .jumbotron,
 .nav :hover {
@@ -5,8 +38,9 @@
 }
 
 body {
-  background: #000000;
-  color: #fff;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Loading animation */
@@ -47,24 +81,24 @@ body {
 
 /* Admin area  */
 .admin-area{
-  background-color: #222831;
+  background-color: var(--admin-area-bg);
 }
 .admin-parent-1{
-  background-color: #082032;
+  background-color: var(--admin-parent-1-bg);
   border-radius: 4px;
 }
 .admin-parent-2{
-  background-color: #1A1A40;
+  background-color: var(--admin-parent-2-bg);
   border-radius: 4px;
 }
 
 /* //manage-category-parent */
 .manage-category-parent{
-  background-color: #525E75;
+  background-color: var(--manage-category-parent-bg);
 }
 .manage-category-child{
-  background-color: #00092C;
-  color: white;
+  background-color: var(--manage-category-child-bg);
+  color: var(--text-primary);
 }
 
 /* //Home page  */

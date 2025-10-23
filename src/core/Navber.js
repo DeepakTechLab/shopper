@@ -1,12 +1,15 @@
 import React, { Fragment } from "react";
-import { Link, useNavigate, NavLink } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import { isAuthenticate, signout } from "../auth/helper";
+import { useTheme } from "../context/ThemeContext";
 
 const Navber = () => {
   const navigate = useNavigate();
+  const { theme, toggleTheme } = useTheme();
+  
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav className={`navbar navbar-expand-lg ${theme === "dark" ? "navbar-dark bg-dark" : "navbar-light bg-light"}`}>
         <div className="container-fluid">
           <button
             className="navbar-toggler"
@@ -80,6 +83,13 @@ const Navber = () => {
                 </li>
               )}
             </ul>
+            <button
+              className={`btn ${theme === "dark" ? "btn-outline-light" : "btn-outline-dark"} ms-auto`}
+              onClick={toggleTheme}
+              title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+            >
+              {theme === "dark" ? "☀️" : "🌙"}
+            </button>
           </div>
         </div>
       </nav>
