@@ -1,11 +1,14 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState, useRef } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import { isAuthenticate, signout } from "../auth/helper";
 import { useTheme } from "../context/ThemeContext";
 
 const Navber = () => {
   const navigate = useNavigate();
-  const { theme, toggleTheme } = useTheme();
+  const { theme, toggleTheme, isTransitioning, createRipple } = useTheme();
+  const [isRotating, setIsRotating] = useState(false);
+  const [iconKey, setIconKey] = useState(0);
+  const buttonRef = useRef(null);
   
   return (
     <>
@@ -84,11 +87,47 @@ const Navber = () => {
               )}
             </ul>
             <button
-              className={`btn ${theme === "dark" ? "btn-outline-light" : "btn-outline-dark"} ms-auto`}
-              onClick={toggleTheme}
+              ref={buttonRef}
+              className={`btn ${theme === "dark" ? "btn-outline-light" : "btn-outline-dark"} ms-auto theme-toggle-btn ripple-container ${isRotating ? "rotating" : ""} ${isTransitioning ? "theme-loading" : ""}`}
+              onClick={(e) => {
+                if (isTransitioning) return;
+                
+                // Create ripple effect
+                createRipple(e);
+                
+                // Start rotation animation
+                setIsRotating(true);
+                
+                // Toggle theme with event for ripple positioning
+                toggleTheme(e);
+                
+                // Icon transition effect
+                setTimeout(() => {
+                  setIconKey(prev => prev + 1);
+                }, 300);
+                
+                // Reset rotation state
+                setTimeout(() => {
+                  setIsRotating(false);
+                }, 600);
+              }}
               title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+              disabled={isTransitioning}
+              style={{
+                position: 'relative',
+                overflow: 'hidden'
+              }}
             >
-              {theme === "dark" ? "☀️" : "🌙"}
+              <span 
+                key={iconKey}
+                className={`theme-icon ${isTransitioning ? "fade-out" : "fade-in"}`}
+                style={{
+                  display: 'inline-block',
+                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+                }}
+              >
+                {theme === "dark" ? "☀️" : "🌙"}
+              </span>
             </button>
           </div>
         </div>
